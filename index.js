@@ -4,7 +4,7 @@ const {PORT} = require('./config/serverConfigs');
 const apiRoutes = require('./routes/index');
 
 // const UserService = require('./services/userServices');
-
+const UserRepository = require('./repository/user-repository')
 
 const app = express();
 
@@ -17,7 +17,9 @@ const prepareAndStartServer = () => {
 
     app.listen(PORT, async () => {
         console.log(`server Started on port: ${PORT}`);
-        
+        const repo = new UserRepository();
+        const response = await repo.getById(1);
+        console.log(response);
         // const service = new UserService();
         // // const newToken = service.createToken({email: 'jatin@123gmail.com',id: 1});
         // // console.log('new token is', newToken);
